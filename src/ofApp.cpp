@@ -17,6 +17,7 @@ void ofApp::setup() {
 
 	shouldLoadRight = false;
 	setVideo(filePath.get());
+	//setVideo("C:/Users/mocan/Videos/2023-02-20 13-48-59.mp4");
 }
 
 void ofApp::setVideo2(string path) {
@@ -119,6 +120,20 @@ void ofApp::draw() {
 		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
 	}
 
+	// Draw legend of keys
+	ofSetColor(198, 198, 198);
+	ofDrawBitmapString("Controls:", 20, 20);
+	ofDrawBitmapString("space -> play / pause (left side)", 20, 50);
+	ofDrawBitmapString("right arrow -> next frame", 20, 70);
+	ofDrawBitmapString("left arrow -> previous frame", 20, 90);
+	ofDrawBitmapString(". -> skip ahead by 10 frames", 20, 110);
+	ofDrawBitmapString(", -> go behind by 10 frames", 20, 130);
+
+	ofDrawBitmapString("i -> set start marker of selected sequence", 20, 155);
+	ofDrawBitmapString("o -> set end marker of selected sequence", 20, 175);
+	ofDrawBitmapString("p -> play / pause selected sequence (right side)", 20, 195);
+	ofDrawBitmapString("[ -> export selected sequence", 20, 215);
+
 	ofPopStyle();
 }
 
@@ -159,7 +174,7 @@ void ofApp::exportSelection() {
 
 	stringstream command;
 	command << ofToDataPath("ffmpeg.exe", true) << " -i " << ofToDataPath(videoPath, true) << " -ss " << startTime << " -to " << stopTime << " -b:v 3M " << outputMp4;
-	cout << command << "\n\n";
+	std::cout << command.str() << "\n\n";
 
 	stringstream command2;
 	command2 << ofToDataPath("ffmpeg.exe", true) << " -i " << outputMp4 << " -filter_complex \"fps=12,scale=960:-1:flags=lanczos,split [o1] [o2];[o1] palettegen [p]; [o2] fifo [o3];[o3] [p] paletteuse\" " << outputGif;
