@@ -26,7 +26,7 @@ public:
 		isWorking = true;
 		cout << scriptMp4 << "\n\n";
 		ofSystem(scriptMp4);
-
+		
 		cout << "\n\n\n\n" << scriptGif << "\n\n";
 		ofSystem(scriptGif);
 

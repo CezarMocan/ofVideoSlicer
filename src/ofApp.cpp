@@ -134,6 +134,8 @@ void ofApp::draw() {
 	ofDrawBitmapString("p -> play / pause selected sequence (right side)", 20, 195);
 	ofDrawBitmapString("[ -> export selected sequence", 20, 215);
 
+	ofDrawBitmapString("z -> open file", 20, 240);
+
 	ofPopStyle();
 }
 
@@ -173,7 +175,7 @@ void ofApp::exportSelection() {
 	string outputThumbnail = ofToDataPath(timestampedOutput + "-thumbnail.jpg", true);
 
 	stringstream command;
-	command << ofToDataPath("ffmpeg.exe", true) << " -i " << ofToDataPath(videoPath, true) << " -ss " << startTime << " -to " << stopTime << " -b:v 3M " << outputMp4;
+	command << ofToDataPath("ffmpeg.exe", true) << " -i " << ofToDataPath(videoPath, true) << " -ss " << startTime << " -to " << stopTime << " -b:v 8M " << outputMp4;
 	std::cout << command.str() << "\n\n";
 
 	stringstream command2;
